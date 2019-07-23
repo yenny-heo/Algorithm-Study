@@ -17,7 +17,7 @@ int main()
 	int top[5] = { 0,0,0,0,0 };
 	for (; K > 0; K--)
 	{
-		int n, d;//n: í†±ë‹ˆë°”í€´ ë²ˆí˜¸, d: ë°©í–¥
+		int n, d;//n: Åé´Ï¹ÙÄû ¹øÈ£, d: ¹æÇâ
 		int rotate[5];
 		for (int i = 1; i < 5; i++)
 		{
@@ -27,7 +27,7 @@ int main()
 		rotate[n] = d;
 	
 
-		//ì˜¤ë¥¸ìª½ìœ¼ë¡œ
+		//¿À¸¥ÂÊÀ¸·Î
 		int curGear = n;
 		int curDir = d;
 		bool flag = 1;
@@ -45,7 +45,7 @@ int main()
 			curDir = -curDir;
 		}
 
-		//ì™¼ìª½ìœ¼ë¡œ
+		//¿ŞÂÊÀ¸·Î
 		curGear = n;
 		curDir = d;
 		flag = 1;
@@ -65,11 +65,11 @@ int main()
 
 		for (int i = 1; i < 5; i++)
 		{
-			if (rotate[i] == 1)//ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „
+			if (rotate[i] == 1)//½Ã°è¹æÇâÀ¸·Î È¸Àü
 			{
 				top[i] = (top[i] + 7) % 8;
 			}
-			else if (rotate[i] == -1)//ë°˜ì‹œê³„
+			else if (rotate[i] == -1)//¹İ½Ã°è
 			{
 				top[i] = (top[i] + 1) % 8;
 			}
