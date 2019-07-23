@@ -1,6 +1,7 @@
 #include<iostream>
+#include<math.h>
 using namespace std;
-int gear[5][8];
+char gear[5][8];
 int visit[4];
 int main()
 {
@@ -13,10 +14,10 @@ int main()
 	}
 	int K;
 	cin >> K;
-	int top[4] = { 0,0,0,0 };
+	int top[5] = { 0,0,0,0,0 };
 	for (; K > 0; K--)
 	{
-		int n, d;//n: Åé´Ï¹ÙÄû ¹øÈ£, d: ¹æÇâ
+		int n, d;//n: í†±ë‹ˆë°”í€´ ë²ˆí˜¸, d: ë°©í–¥
 		int rotate[5];
 		for (int i = 1; i < 5; i++)
 		{
@@ -26,7 +27,7 @@ int main()
 		rotate[n] = d;
 	
 
-		//¿À¸¥ÂÊÀ¸·Î
+		//ì˜¤ë¥¸ìª½ìœ¼ë¡œ
 		int curGear = n;
 		int curDir = d;
 		bool flag = 1;
@@ -44,7 +45,7 @@ int main()
 			curDir = -curDir;
 		}
 
-		//¿ŞÂÊÀ¸·Î
+		//ì™¼ìª½ìœ¼ë¡œ
 		curGear = n;
 		curDir = d;
 		flag = 1;
@@ -61,23 +62,27 @@ int main()
 			curGear--;
 			curDir = -curDir;
 		}
-		for (int i = 1; i < 5; i++)
-		{
-			cout << rotate[i];
-		}
-		cout << endl;
 
 		for (int i = 1; i < 5; i++)
 		{
-			if (rotate[i] == 1)//½Ã°è¹æÇâÀ¸·Î È¸Àü
+			if (rotate[i] == 1)//ì‹œê³„ë°©í–¥ìœ¼ë¡œ íšŒì „
 			{
 				top[i] = (top[i] + 7) % 8;
 			}
-			else if (rotate[i] == -1)//¹İ½Ã°è
+			else if (rotate[i] == -1)//ë°˜ì‹œê³„
 			{
 				top[i] = (top[i] + 1) % 8;
 			}
 		}
 
 	}
+	int score = 0;
+	for (int i = 1; i < 5; i++)
+	{
+		if (gear[i][top[i]] == '1')
+		{
+			score += pow(2, i - 1);
+		}
+	}
+	cout << score << "\n";
 }
