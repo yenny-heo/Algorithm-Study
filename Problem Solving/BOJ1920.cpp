@@ -9,38 +9,40 @@
 #include <iostream>
 #include <algorithm>
 using namespace std;
-int A[100000];
+long tree[1000000];
 int main(){
-    cin.tie(NULL);
-    ios::sync_with_stdio(false);
     int N, M;
-    cin>>N;
+    long end = 0;
+    cin>>N>>M;
     for(int i=0; i<N; i++){
-        cin>>A[i];
-    }
-    sort(A, A+N);
-    cin>>M;
-    int a;
-    for(int i=0; i<M; i++){
-        int left = 0, mid = N/2, right = N-1;
-        cin>>a;
-        bool flag = 0;
-        while(left - right <= 0){
-            if(A[mid] == a) {
-                flag = 1;
-                break;
-            }
-            else if(A[mid] >= a){
-                right = mid - 1;
-                mid = (left + right)/2;
-            }
-            else{
-                left = mid + 1;
-                mid = (left + right)/2;
-            }
-        }
-        if(flag) cout<<1<<"\n";
-        else cout<<0<<"\n";
+        cin>>tree[i];
+        if(tree[i] > end) end = tree[i];
     }
     
+    long start, mid;
+    start = 0;
+    
+    long sum = 0;
+    long result =0;
+    while(start <= end){    // sum = M 이면 답이 나온거니까 sum != M이면서 이분탐색 다 할때까지 while문
+        mid = (start + end) / 2;
+        
+        sum = 0;
+        for(int i=0; i < N; i++){
+            if(tree[i] > mid)
+                sum += tree[i] - mid;
+        }
+        
+        //가져가려고 하는 나무 길이 보다 합이 작을 때.
+        if(sum >= M){                            // sum == M 인 경우?
+            start = mid + 1;
+            result = mid;
+        }
+        //가져가려고 하는 나무 길이 보다 합이 클 때.
+        else {
+            end = mid - 1;
+        }
+    }
+    
+    cout<< result <<endl;
 }
